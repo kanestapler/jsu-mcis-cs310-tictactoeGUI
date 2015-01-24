@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 2.8.5 (Jython 2.5.3 on java1.7.0_45)" generated="20150123 15:34:51.895">
+<suite source="C:\Users\Kane\tictactoe\acceptance\TicTacToeTests.txt" id="s1" name="TicTacToeTests">
+<test id="s1-t1" name="Win Diagonally as X">
+<kw type="kw" name="TicTacToeKeywords.Start New Game">
+<doc></doc>
+<arguments>
+</arguments>
+<status status="PASS" endtime="20150123 15:34:52.317" starttime="20150123 15:34:52.317"></status>
+</kw>
+<kw type="kw" name="TicTacToeKeywords.Mark Location">
+<doc></doc>
+<arguments>
+<arg>1</arg>
+<arg>1</arg>
+</arguments>
+<status status="PASS" endtime="20150123 15:34:52.317" starttime="20150123 15:34:52.317"></status>
+</kw>
+<kw type="kw" name="Location Should Be">
+<doc></doc>
+<arguments>
+<arg>1</arg>
+<arg>1</arg>
+<arg>X</arg>
+</arguments>
+<msg timestamp="20150123 15:34:52.333" level="FAIL">No keyword with name 'Location Should Be' found.</msg>
+<status status="FAIL" endtime="20150123 15:34:52.333" starttime="20150123 15:34:52.333"></status>
+</kw>
+<doc></doc>
+<tags>
+</tags>
+<status status="FAIL" critical="yes" endtime="20150123 15:34:52.333" starttime="20150123 15:34:52.317">No keyword with name 'Location Should Be' found.</status>
+</test>
+<test id="s1-t2" name="Win Horizontally as O">
+<kw type="kw" name="TicTacToeKeywords.Start New Game">
+<doc></doc>
+<arguments>
+</arguments>
+<status status="PASS" endtime="20150123 15:34:52.349" starttime="20150123 15:34:52.333"></status>
+</kw>
+<kw type="kw" name="TicTacToeKeywords.Mark Location">
+<doc></doc>
+<arguments>
+<arg>1</arg>
+<arg>1</arg>
+</arguments>
+<status status="PASS" endtime="20150123 15:34:52.349" starttime="20150123 15:34:52.349"></status>
+</kw>
+<kw type="kw" name="Location Should Be">
+<doc></doc>
+<arguments>
+<arg>1</arg>
+<arg>1</arg>
+<arg>X</arg>
+</arguments>
+<msg timestamp="20150123 15:34:52.349" level="FAIL">No keyword with name 'Location Should Be' found.</msg>
+<status status="FAIL" endtime="20150123 15:34:52.349" starttime="20150123 15:34:52.349"></status>
+</kw>
+<doc></doc>
+<tags>
+</tags>
+<status status="FAIL" critical="yes" endtime="20150123 15:34:52.364" starttime="20150123 15:34:52.333">No keyword with name 'Location Should Be' found.</status>
+</test>
+<test id="s1-t3" name="Force a Tie">
+<kw type="kw" name="TicTacToeKeywords.Start New Game">
+<doc></doc>
+<arguments>
+</arguments>
+<status status="PASS" endtime="20150123 15:34:52.364" starttime="20150123 15:34:52.364"></status>
+</kw>
+<kw type="kw" name="TicTacToeKeywords.Mark Location">
+<doc></doc>
+<arguments>
+<arg>1</arg>
+<arg>1</arg>
+</arguments>
+<status status="PASS" endtime="20150123 15:34:52.380" starttime="20150123 15:34:52.364"></status>
+</kw>
+<kw type="kw" name="Location Should Be">
+<doc></doc>
+<arguments>
+<arg>1</arg>
+<arg>1</arg>
+<arg>X</arg>
+</arguments>
+<msg timestamp="20150123 15:34:52.380" level="FAIL">No keyword with name 'Location Should Be' found.</msg>
+<status status="FAIL" endtime="20150123 15:34:52.380" starttime="20150123 15:34:52.380"></status>
+</kw>
+<doc></doc>
+<tags>
+</tags>
+<status status="FAIL" critical="yes" endtime="20150123 15:34:52.380" starttime="20150123 15:34:52.364">No keyword with name 'Location Should Be' found.</status>
+</test>
+<doc></doc>
+<metadata>
+</metadata>
+<status status="FAIL" endtime="20150123 15:34:52.380" starttime="20150123 15:34:51.895"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="3">Critical Tests</stat>
+<stat pass="0" fail="3">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" id="s1" fail="3" name="TicTacToeTests">TicTacToeTests</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20150123 15:34:51.770" level="ERROR">Error in file 'C:\Users\Kane\tictactoe\acceptance\TicTacToeTests.txt': Non-existing setting 'Location Should Be'.</msg>
+<msg timestamp="20150123 15:34:51.786" level="ERROR">Error in file 'C:\Users\Kane\tictactoe\acceptance\TicTacToeTests.txt': Non-existing setting ''.</msg>
+<msg timestamp="20150123 15:34:51.786" level="ERROR">Error in file 'C:\Users\Kane\tictactoe\acceptance\TicTacToeTests.txt': Non-existing setting ''.</msg>
+<msg timestamp="20150123 15:34:51.786" level="ERROR">Error in file 'C:\Users\Kane\tictactoe\acceptance\TicTacToeTests.txt': Non-existing setting 'Winner Should Be'.</msg>
+<msg timestamp="20150123 15:34:51.786" level="ERROR">Error in file 'C:\Users\Kane\tictactoe\acceptance\TicTacToeTests.txt': Non-existing setting ''.</msg>
+<msg timestamp="20150123 15:34:51.786" level="ERROR">Error in file 'C:\Users\Kane\tictactoe\acceptance\TicTacToeTests.txt': Non-existing setting ''.</msg>
+</errors>
+</robot>

@@ -1,14 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.TicTacToeTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2015-01-22T03:14:00" hostname="YogaPro" time="0.016">
+<testsuite name="edu.jsu.mcis.TicTacToeTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2015-01-24T05:25:52" hostname="YogaPro" time="0.063">
   <properties/>
-  <testcase name="testInitialBoardIsCompletelyEmpty" classname="edu.jsu.mcis.TicTacToeTest" time="0.016"/>
-  <testcase name="testIfGameIsTiedAndAllSpacesAreBeingUsed" classname="edu.jsu.mcis.TicTacToeTest" time="0.0"/>
+  <testcase name="testInitialBoardIsCompletelyEmpty" classname="edu.jsu.mcis.TicTacToeTest" time="0.0"/>
+  <testcase name="testIfGameIsWonByXDiagonalTopLeftToBottomRightOnLastPossibleMove" classname="edu.jsu.mcis.TicTacToeTest" time="0.031"/>
+  <testcase name="testIfGameIsTiedAndAllSpacesAreBeingUsed" classname="edu.jsu.mcis.TicTacToeTest" time="0.016"/>
   <testcase name="testIfGameIsWonByOOnMiddleColDown" classname="edu.jsu.mcis.TicTacToeTest" time="0.0"/>
   <testcase name="testIfGameIsWonByXOnTopRowAcross" classname="edu.jsu.mcis.TicTacToeTest" time="0.0"/>
   <testcase name="testMarkXInUpperRightCorner" classname="edu.jsu.mcis.TicTacToeTest" time="0.0"/>
   <testcase name="testIfGameIsWonByXDiagonalTopLeftToBottomRight" classname="edu.jsu.mcis.TicTacToeTest" time="0.0"/>
   <testcase name="testMarkOInBottomLeftCorner" classname="edu.jsu.mcis.TicTacToeTest" time="0.0"/>
-  <testcase name="testMarkXInMiddleAndOInBottomRightCorner" classname="edu.jsu.mcis.TicTacToeTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="testMarkXInMiddleAndOInBottomRightCorner" classname="edu.jsu.mcis.TicTacToeTest" time="0.016"/>
+  <testcase name="testGettingMarkInTopLeftAndReturningAsAString" classname="edu.jsu.mcis.TicTacToeTest" time="0.0"/>
+  <system-out><![CDATA[
+   X| | 
+   -----
+    | | 
+   -----
+    | | 
+
+
+   X|O| 
+   -----
+    | | 
+   -----
+    | | 
+
+
+   X|O|X
+   -----
+    | | 
+   -----
+    | | 
+
+
+   X|O|X
+   -----
+   O| | 
+   -----
+    | | 
+
+
+   X|O|X
+   -----
+   O|X| 
+   -----
+    | | 
+
+
+   X|O|X
+   -----
+   O|X|O
+   -----
+    | | 
+
+
+   X|O|X
+   -----
+   O|X|O
+   -----
+    |X| 
+
+
+   X|O|X
+   -----
+   O|X|O
+   -----
+   O|X| 
+
+
+   X|O|X
+   -----
+   O|X|O
+   -----
+   O|X|X
+
+
+   X| | 
+   -----
+    | | 
+   -----
+    | | 
+
+
+   X| |O
+   -----
+    | | 
+   -----
+    | | 
+
+
+   X|X|O
+   -----
+    | | 
+   -----
+    | | 
+
+
+   X|X|O
+   -----
+   O| | 
+   -----
+    | | 
+
+
+   X|X|O
+   -----
+   O| |X
+   -----
+    | | 
+
+
+   X|X|O
+   -----
+   O|O|X
+   -----
+    | | 
+
+
+   X|X|O
+   -----
+   O|O|X
+   -----
+   X| | 
+
+
+   X|X|O
+   -----
+   O|O|X
+   -----
+   X| |O
+
+
+   X|X|O
+   -----
+   O|O|X
+   -----
+   X|X|O
+
+
+    | |X
+   -----
+    | | 
+   -----
+    | | 
+
+
+    | | 
+   -----
+    |X| 
+   -----
+    | | 
+
+
+    | | 
+   -----
+    |X| 
+   -----
+    | |O
+
+
+   X| | 
+   -----
+    | | 
+   -----
+    | | 
+
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

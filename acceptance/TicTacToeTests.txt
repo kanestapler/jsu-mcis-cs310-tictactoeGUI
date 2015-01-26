@@ -1,6 +1,8 @@
 *** Settings ***
 Library           TicTacToeKeywords
 
+*** Keywords ***
+
 Location Should Be   [Arguments]   ${row}    ${col}    ${mark}
     ${m}=   Get Mark    ${row}    ${col}
 	Should Be Equal    ${m}    ${mark}    

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TicTacToe.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tictactoe</a> &gt; <a href="index.source.html" class="el_package">edu.jsu.mcis</a> &gt; <span class="el_source">TicTacToe.java</span></div><h1>TicTacToe.java</h1><pre class="source lang-java linenums">package edu.jsu.mcis;
+
+import java.util.Scanner;
+
+public class TicTacToe {
+<span class="fc" id="L6">	public final int EMPTY = 0;</span>
+<span class="fc" id="L7">	public final int X_MARK = 1;</span>
+<span class="fc" id="L8">	public final int O_MARK = 2;</span>
+	
+<span class="fc" id="L10">	public final int TOP_ROW = 0;</span>
+<span class="fc" id="L11">	public final int MIDDLE_ROW = 1;</span>
+<span class="fc" id="L12">	public final int BOTTOM_ROW = 2;</span>
+	
+<span class="fc" id="L14">	public final int LEFT_COL = 0;</span>
+<span class="fc" id="L15">	public final int MIDDLE_COL = 1;</span>
+<span class="fc" id="L16">	public final int RIGHT_COL = 2;</span>
+	
+<span class="fc" id="L18">	private int[][] gameBoard = new int[3][3];</span>
+	
+<span class="fc" id="L20">	private int turn = X_MARK;</span>
+	
+<span class="fc" id="L22">	public TicTacToe() {</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">		for (int i = 0; i &lt; 3; i++) {</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">			for (int j = 0; j &lt; 3; j++) {</span>
+<span class="fc" id="L25">				gameBoard[i][j] = EMPTY;</span>
+			}
+		}
+<span class="fc" id="L28">	}</span>
+	
+	public static void main(String[] args) {
+		
+<span class="nc" id="L32">		TicTacToe board = new TicTacToe();</span>
+		
+<span class="nc" id="L34">		Scanner input = new Scanner(System.in);</span>
+		
+		int userInputRow;
+		int userInputCol;
+		
+<span class="nc" id="L39">		System.out.println(&quot;Welcome to Ricky's Tic Tac Toe&quot;);</span>
+		
+		
+<span class="nc bnc" id="L42" title="All 4 branches missed.">		while (board.whoWon() == board.EMPTY &amp;&amp; !board.isItATie()) {</span>
+<span class="nc" id="L43">			userInputRow = -1;</span>
+<span class="nc" id="L44">			userInputCol = -1;</span>
+<span class="nc bnc" id="L45" title="All 4 branches missed.">			while (userInputRow &gt; 2 || userInputRow &lt; 0) {</span>
+<span class="nc" id="L46">				userInputRow = board.getRowFromUser();</span>
+			}
+<span class="nc bnc" id="L48" title="All 4 branches missed.">			while (userInputCol &gt; 2 || userInputCol &lt; 0) {</span>
+<span class="nc" id="L49">				userInputCol = board.getColFromUser();</span>
+			}
+<span class="nc" id="L51">			board.setMark(userInputRow, userInputCol);</span>
+			
+			
+		}
+		
+<span class="nc" id="L56">		board.printOutGameResult();</span>
+		
+		
+<span class="nc" id="L59">	}</span>
+	
+	public void printOutGameResult() {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">		if (whoWon() == X_MARK) {</span>
+<span class="nc" id="L63">			System.out.println(&quot;X Wins!&quot;);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		} else if (whoWon() == O_MARK) {</span>
+<span class="nc" id="L65">			System.out.println(&quot;O Wins!&quot;);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">		} else if (isItATie()) {</span>
+<span class="nc" id="L67">			System.out.println(&quot;It's a tie!&quot;);</span>
+		} else {
+<span class="nc" id="L69">			System.out.println(&quot;Print out Results Broken&quot;);</span>
+		}
+		
+<span class="nc" id="L72">		printGameBoard();</span>
+<span class="nc" id="L73">	}</span>
+	
+	public void printGameBoard() {
+<span class="fc" id="L76">		System.out.println();</span>
+<span class="fc" id="L77">		printTopRow();</span>
+<span class="fc" id="L78">		printDividingLine();</span>
+<span class="fc" id="L79">		printMiddleRow();</span>
+<span class="fc" id="L80">		printDividingLine();</span>
+<span class="fc" id="L81">		printBottomRow();</span>
+<span class="fc" id="L82">		System.out.println();</span>
+<span class="fc" id="L83">	}</span>
+	
+	public void printTopRow() {
+<span class="fc" id="L86">		System.out.println(&quot;   &quot; + getMarkInString(TOP_ROW, LEFT_COL) +&quot;|&quot;+ getMarkInString(TOP_ROW, MIDDLE_COL) +&quot;|&quot; + getMarkInString(TOP_ROW, RIGHT_COL));</span>
+<span class="fc" id="L87">	}</span>
+	
+	public void printMiddleRow() {
+<span class="fc" id="L90">		System.out.println(&quot;   &quot; + getMarkInString(MIDDLE_ROW, LEFT_COL) +&quot;|&quot;+ getMarkInString(MIDDLE_ROW, MIDDLE_COL) +&quot;|&quot; + getMarkInString(MIDDLE_ROW, RIGHT_COL));</span>
+<span class="fc" id="L91">	}</span>
+	
+	public void printBottomRow() {
+<span class="fc" id="L94">		System.out.println(&quot;   &quot; + getMarkInString(BOTTOM_ROW, LEFT_COL) +&quot;|&quot;+ getMarkInString(BOTTOM_ROW, MIDDLE_COL) +&quot;|&quot; + getMarkInString(BOTTOM_ROW, RIGHT_COL));</span>
+<span class="fc" id="L95">	}</span>
+	
+	public void printDividingLine() {
+<span class="fc" id="L98">		System.out.println(&quot;   -----&quot;);</span>
+<span class="fc" id="L99">	}</span>
+	
+	public String getMarkInString(int row, int col) {
+<span class="fc bfc" id="L102" title="All 2 branches covered.">		if (getMark(row, col) == X_MARK) {</span>
+<span class="fc" id="L103">			return &quot;X&quot;;</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">		} else if (getMark(row, col) == O_MARK) {</span>
+<span class="fc" id="L105">			return &quot;O&quot;;</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">		} else if (getMark(row, col) == EMPTY) {</span>
+<span class="fc" id="L107">			return &quot; &quot;;</span>
+		} else {
+<span class="nc" id="L109">			return &quot;BROKEN&quot;;</span>
+		}
+	}
+	
+	public int getRowFromUser() {
+<span class="nc" id="L114">		Scanner input = new Scanner(System.in);</span>
+		
+<span class="nc bnc" id="L116" title="All 2 branches missed.">		if (turn == X_MARK) {</span>
+<span class="nc" id="L117">			System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L118">			System.out.println(&quot;X please enter a row (0-2)&quot;);</span>
+<span class="nc" id="L119">			return input.nextInt();</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">		} else if (turn == O_MARK) {</span>
+<span class="nc" id="L121">			System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L122">			System.out.println(&quot;O please enter a row (0-2)&quot;);</span>
+<span class="nc" id="L123">			return input.nextInt();</span>
+		} else {
+<span class="nc" id="L125">			System.out.println(&quot;You broke the turn function&quot;);</span>
+<span class="nc" id="L126">			return -1;</span>
+		}
+	}
+	
+	public int getColFromUser() {
+<span class="nc" id="L131">		Scanner input = new Scanner(System.in);</span>
+		
+<span class="nc bnc" id="L133" title="All 2 branches missed.">		if (turn == X_MARK) {</span>
+<span class="nc" id="L134">			System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L135">			System.out.println(&quot;X please enter a col (0-2)&quot;);</span>
+<span class="nc" id="L136">			return input.nextInt();</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">		} else if (turn == O_MARK) {</span>
+<span class="nc" id="L138">			System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L139">			System.out.println(&quot;O please enter a col (0-2)&quot;);</span>
+<span class="nc" id="L140">			return input.nextInt();</span>
+		} else {
+<span class="nc" id="L142">			System.out.println(&quot;You broke the turn function&quot;);</span>
+<span class="nc" id="L143">			return -1;</span>
+		}
+	}
+	
+	public int getMark(int row, int col) {
+<span class="fc" id="L148">		return gameBoard[row][col];</span>
+	}
+	
+	public void setMark(int row, int col) {
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">		if (gameBoard[row][col] != EMPTY) {</span>
+<span class="nc" id="L153">			System.out.println(&quot;That space is not empty&quot;);</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">		}else if (turn == X_MARK) {</span>
+<span class="fc" id="L155">			gameBoard[row][col] = X_MARK;</span>
+<span class="fc" id="L156">			turn = O_MARK;</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">		} else if (turn == O_MARK) {</span>
+<span class="fc" id="L158">			gameBoard[row][col] = O_MARK;</span>
+<span class="fc" id="L159">			turn = X_MARK;</span>
+		}
+<span class="fc" id="L161">		printGameBoard();</span>
+<span class="fc" id="L162">	}</span>
+	
+	public void setMarkX(int row, int col) {
+<span class="fc" id="L165">		gameBoard[row][col] = X_MARK;</span>
+<span class="fc" id="L166">	}</span>
+	
+	public void setMarkO(int row, int col) {
+<span class="fc" id="L169">		gameBoard[row][col] = O_MARK;</span>
+<span class="fc" id="L170">	}</span>
+	
+	public int whoWon() {
+<span class="fc bfc" id="L173" title="All 2 branches covered.">		for(int row = 0; row &lt; 3; row++) {</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">			if (isRowAWinner(row)) {</span>
+<span class="fc" id="L175">				return gameBoard[row][LEFT_COL];</span>
+			}
+		}
+		
+<span class="fc bfc" id="L179" title="All 2 branches covered.">		for (int col = 0; col &lt; 3; col++) {</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">			if (isColAWinner(col)) {</span>
+<span class="fc" id="L181">				return gameBoard[TOP_ROW][col];</span>
+			}
+		}
+
+<span class="fc bfc" id="L185" title="All 2 branches covered.">		if (isDiagonalAWinner()) {</span>
+<span class="fc" id="L186">			return gameBoard[MIDDLE_ROW][MIDDLE_COL];</span>
+		}
+
+		
+<span class="fc" id="L190">		return EMPTY;</span>
+	}
+	
+	private boolean isRowAWinner(int row) {
+<span class="fc bfc" id="L194" title="All 6 branches covered.">		if(gameBoard[row][LEFT_COL] == gameBoard[row][MIDDLE_COL] &amp;&amp; gameBoard[row][MIDDLE_COL] == gameBoard[row][RIGHT_COL] &amp;&amp; gameBoard[row][LEFT_COL] != EMPTY) {</span>
+<span class="fc" id="L195">			return true;</span>
+		} else {
+<span class="fc" id="L197">			return false;</span>
+		}
+	}
+	
+	private boolean isColAWinner(int col) {
+<span class="fc bfc" id="L202" title="All 6 branches covered.">		if(gameBoard[TOP_ROW][col] == gameBoard[MIDDLE_ROW][col] &amp;&amp; gameBoard[MIDDLE_ROW][col] == gameBoard[BOTTOM_ROW][col] &amp;&amp; gameBoard[TOP_ROW][col] != EMPTY) {</span>
+<span class="fc" id="L203">			return true;</span>
+		} else {
+<span class="fc" id="L205">			return false;</span>
+		}
+	}
+	
+	private boolean isDiagonalAWinner() {
+<span class="pc bpc" id="L210" title="1 of 6 branches missed.">		if (gameBoard[TOP_ROW][LEFT_COL] == gameBoard[MIDDLE_ROW][MIDDLE_COL] &amp;&amp; </span>
+		gameBoard[MIDDLE_ROW][MIDDLE_COL] == gameBoard[BOTTOM_ROW][RIGHT_COL] &amp;&amp; 
+		gameBoard[BOTTOM_ROW][RIGHT_COL] != EMPTY) {
+<span class="fc" id="L213">			return true;</span>
+<span class="pc bpc" id="L214" title="1 of 6 branches missed.">		}else if (gameBoard[TOP_ROW][RIGHT_COL] == gameBoard[MIDDLE_ROW][MIDDLE_COL] &amp;&amp;</span>
+		gameBoard[MIDDLE_ROW][MIDDLE_COL] == gameBoard[BOTTOM_ROW][LEFT_COL] &amp;&amp;
+		gameBoard[BOTTOM_ROW][LEFT_COL] != EMPTY) {
+<span class="nc" id="L217">			return true;</span>
+		} else {
+<span class="fc" id="L219">			return false;</span>
+		}
+	}
+	
+	public boolean isItATie() {
+<span class="fc bfc" id="L224" title="All 2 branches covered.">		for (int row = 0; row &lt; 3; row++) {</span>
+<span class="fc bfc" id="L225" title="All 2 branches covered.">			for (int col = 0; col &lt; 3; col++) {</span>
+<span class="pc bpc" id="L226" title="1 of 2 branches missed.">				if (gameBoard[row][col] == EMPTY) {</span>
+<span class="nc" id="L227">					return false;</span>
+				}
+			}
+		}
+<span class="pc bpc" id="L231" title="1 of 2 branches missed.">		if (whoWon() == X_MARK) {</span>
+<span class="nc" id="L232">			return false;</span>
+<span class="pc bpc" id="L233" title="1 of 2 branches missed.">		} else if (whoWon() == O_MARK) {</span>
+<span class="nc" id="L234">			return false;</span>
+		} else {
+<span class="fc" id="L236">			return true;</span>
+		}
+		
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

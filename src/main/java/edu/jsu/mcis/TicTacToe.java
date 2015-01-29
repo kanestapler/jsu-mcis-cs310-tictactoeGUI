@@ -1,197 +1,174 @@
 package edu.jsu.mcis;
 
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.event.*;
+import java.awt.Font;
+
 
 public class TicTacToe {
-	public final int EMPTY = 0;
-	public final int X_MARK = 1;
-	public final int O_MARK = 2;
+    
+    public enum Mark {EMPTY, X_MARK, O_MARK, TIE};
 	
-	public final int TOP_ROW = 0;
-	public final int MIDDLE_ROW = 1;
-	public final int BOTTOM_ROW = 2;
+	public final int ROWS = 0;
+	public final int COLS = 0;
 	
-	public final int LEFT_COL = 0;
-	public final int MIDDLE_COL = 1;
-	public final int RIGHT_COL = 2;
+	private Mark[][] gameBoard = new Mark[3][3];
+    
+    private JButton[][] buttonTiles = new JButton[3][3];
 	
-	private int[][] gameBoard = new int[3][3];
-	
-	private int turn = X_MARK;
+	private Mark turn = Mark.X_MARK;
 	
 	public TicTacToe() {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				gameBoard[i][j] = EMPTY;
+				gameBoard[i][j] = Mark.EMPTY;
 			}
 		}
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                buttonTiles[i][j] = new JButton("");
+                buttonTiles[i][j].setLabel("");
+                buttonTiles[i][j].addActionListener(new ButtonListener(i, j));
+                buttonTiles[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
+            }
+        }
+        
 	}
 	
 	public static void main(String[] args) {
-		
-		TicTacToe board = new TicTacToe();
-		
-		Scanner input = new Scanner(System.in);
-		
-		int userInputRow;
-		int userInputCol;
-		
-		System.out.println("Welcome to Ricky's Tic Tac Toe");
-		
-		
-		while (board.whoWon() == board.EMPTY && !board.isItATie()) {
-			userInputRow = -1;
-			userInputCol = -1;
-			while (userInputRow > 2 || userInputRow < 0) {
-				userInputRow = board.getRowFromUser();
-			}
-			while (userInputCol > 2 || userInputCol < 0) {
-				userInputCol = board.getColFromUser();
-			}
-			board.setMark(userInputRow, userInputCol);
-			
-			
-		}
-		
-		board.printOutGameResult();
-		
-		
+        
+        JFrame frame = new JFrame("Tic Tac Toe");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(3,3));
+        frame.setSize(500,500);
+        TicTacToe board = new TicTacToe(); 
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                frame.add(board.buttonTiles[i][j]);
+            }
+        }
+        frame.setVisible(true);	
 	}
+    
+    private class ButtonListener implements ActionListener {
+        private int row;
+        private int col;
+        
+        public ButtonListener(int i, int j) {
+            row = i;
+            col = j;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            buttonClicked(row, col);
+        }
+    }
+    
+    private void buttonClicked(int row, int col) {
+        setMark(row, col);
+        setButtonLabel(row, col);
+        if (isThereAWinner() == Mark.X_MARK) {
+            JOptionPane.showMessageDialog(null, "The winner is X");
+            resetGame();
+        } else if (isThereAWinner() == Mark.O_MARK) {
+            JOptionPane.showMessageDialog(null, "The winner is O");
+            resetGame();
+        } else if (isThereAWinner() == Mark.TIE) {
+            JOptionPane.showMessageDialog(null, "The winner is TIE");
+            resetGame();
+        } else if (isThereAWinner() == Mark.EMPTY) {
+            //No winner yet
+        }
+    }
+    
+    private void setButtonLabel(int row, int col) {
+        buttonTiles[row][col].setLabel(getMarkInString(row, col));
+    }
 	
-	public void printOutGameResult() {
-		if (whoWon() == X_MARK) {
-			System.out.println("X Wins!");
-		} else if (whoWon() == O_MARK) {
-			System.out.println("O Wins!");
-		} else if (isItATie()) {
-			System.out.println("It's a tie!");
-		} else {
-			System.out.println("Print out Results Broken");
-		}
-		
-		printGameBoard();
-	}
-	
-	public void printGameBoard() {
-		System.out.println();
-		printTopRow();
-		printDividingLine();
-		printMiddleRow();
-		printDividingLine();
-		printBottomRow();
-		System.out.println();
-	}
-	
-	public void printTopRow() {
-		System.out.println("   " + getMarkInString(TOP_ROW, LEFT_COL) +"|"+ getMarkInString(TOP_ROW, MIDDLE_COL) +"|" + getMarkInString(TOP_ROW, RIGHT_COL));
-	}
-	
-	public void printMiddleRow() {
-		System.out.println("   " + getMarkInString(MIDDLE_ROW, LEFT_COL) +"|"+ getMarkInString(MIDDLE_ROW, MIDDLE_COL) +"|" + getMarkInString(MIDDLE_ROW, RIGHT_COL));
-	}
-	
-	public void printBottomRow() {
-		System.out.println("   " + getMarkInString(BOTTOM_ROW, LEFT_COL) +"|"+ getMarkInString(BOTTOM_ROW, MIDDLE_COL) +"|" + getMarkInString(BOTTOM_ROW, RIGHT_COL));
-	}
-	
-	public void printDividingLine() {
-		System.out.println("   -----");
-	}
+    
+    public Mark getTurn() {
+        return turn;
+    }
+    
+    public void resetGame() {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                gameBoard[row][col] = Mark.EMPTY;
+                setButtonLabel(row, col);
+            }
+        }
+        turn = Mark.X_MARK;
+    }
 	
 	public String getMarkInString(int row, int col) {
-		if (getMark(row, col) == X_MARK) {
+		if (getMark(row, col) == Mark.X_MARK) {
 			return "X";
-		} else if (getMark(row, col) == O_MARK) {
+		} else if (getMark(row, col) == Mark.O_MARK) {
 			return "O";
-		} else if (getMark(row, col) == EMPTY) {
+		} else if (getMark(row, col) == Mark.EMPTY) {
 			return " ";
 		} else {
 			return "BROKEN";
 		}
 	}
 	
-	public int getRowFromUser() {
-		Scanner input = new Scanner(System.in);
-		
-		if (turn == X_MARK) {
-			System.out.println("");
-			System.out.println("X please enter a row (0-2)");
-			return input.nextInt();
-		} else if (turn == O_MARK) {
-			System.out.println("");
-			System.out.println("O please enter a row (0-2)");
-			return input.nextInt();
-		} else {
-			System.out.println("You broke the turn function");
-			return -1;
-		}
-	}
 	
-	public int getColFromUser() {
-		Scanner input = new Scanner(System.in);
-		
-		if (turn == X_MARK) {
-			System.out.println("");
-			System.out.println("X please enter a col (0-2)");
-			return input.nextInt();
-		} else if (turn == O_MARK) {
-			System.out.println("");
-			System.out.println("O please enter a col (0-2)");
-			return input.nextInt();
-		} else {
-			System.out.println("You broke the turn function");
-			return -1;
-		}
-	}
 	
-	public int getMark(int row, int col) {
+	public Mark getMark(int row, int col) {
 		return gameBoard[row][col];
 	}
 	
 	public void setMark(int row, int col) {
-		if (gameBoard[row][col] != EMPTY) {
-			System.out.println("That space is not empty");
-		}else if (turn == X_MARK) {
-			gameBoard[row][col] = X_MARK;
-			turn = O_MARK;
-		} else if (turn == O_MARK) {
-			gameBoard[row][col] = O_MARK;
-			turn = X_MARK;
+		if (gameBoard[row][col] != Mark.EMPTY) {
+            
+		}else if (turn == Mark.X_MARK) {
+			gameBoard[row][col] = Mark.X_MARK;
+			turn = Mark.O_MARK;
+		} else if (turn == Mark.O_MARK) {
+			gameBoard[row][col] = Mark.O_MARK;
+			turn = Mark.X_MARK;
 		}
-		printGameBoard();
 	}
 	
 	public void setMarkX(int row, int col) {
-		gameBoard[row][col] = X_MARK;
+		gameBoard[row][col] = Mark.X_MARK;
 	}
 	
 	public void setMarkO(int row, int col) {
-		gameBoard[row][col] = O_MARK;
+		gameBoard[row][col] = Mark.O_MARK;
 	}
 	
-	public int whoWon() {
+	public Mark isThereAWinner() {
 		for(int row = 0; row < 3; row++) {
 			if (isRowAWinner(row)) {
-				return gameBoard[row][LEFT_COL];
+				return gameBoard[row][0];
 			}
 		}
 		
 		for (int col = 0; col < 3; col++) {
 			if (isColAWinner(col)) {
-				return gameBoard[TOP_ROW][col];
+				return gameBoard[0][col];
 			}
 		}
 
 		if (isDiagonalAWinner()) {
-			return gameBoard[MIDDLE_ROW][MIDDLE_COL];
+			return gameBoard[1][1];
 		}
+        
+        if (isItATie()) {
+            return Mark.TIE;
+        }
+        
+        return Mark.EMPTY;
 
-		
-		return EMPTY;
 	}
 	
 	private boolean isRowAWinner(int row) {
-		if(gameBoard[row][LEFT_COL] == gameBoard[row][MIDDLE_COL] && gameBoard[row][MIDDLE_COL] == gameBoard[row][RIGHT_COL] && gameBoard[row][LEFT_COL] != EMPTY) {
+		if(gameBoard[row][0] == gameBoard[row][1] && gameBoard[row][1] == gameBoard[row][2] && gameBoard[row][0] != Mark.EMPTY) {
 			return true;
 		} else {
 			return false;
@@ -199,7 +176,7 @@ public class TicTacToe {
 	}
 	
 	private boolean isColAWinner(int col) {
-		if(gameBoard[TOP_ROW][col] == gameBoard[MIDDLE_ROW][col] && gameBoard[MIDDLE_ROW][col] == gameBoard[BOTTOM_ROW][col] && gameBoard[TOP_ROW][col] != EMPTY) {
+		if(gameBoard[0][col] == gameBoard[1][col] && gameBoard[1][col] == gameBoard[2][col] && gameBoard[0][col] != Mark.EMPTY) {
 			return true;
 		} else {
 			return false;
@@ -207,34 +184,27 @@ public class TicTacToe {
 	}
 	
 	private boolean isDiagonalAWinner() {
-		if (gameBoard[TOP_ROW][LEFT_COL] == gameBoard[MIDDLE_ROW][MIDDLE_COL] && 
-		gameBoard[MIDDLE_ROW][MIDDLE_COL] == gameBoard[BOTTOM_ROW][RIGHT_COL] && 
-		gameBoard[BOTTOM_ROW][RIGHT_COL] != EMPTY) {
+		if (gameBoard[0][0] == gameBoard[1][1] && 
+		gameBoard[1][1] == gameBoard[2][2] && 
+		gameBoard[2][2] != Mark.EMPTY) {
 			return true;
-		}else if (gameBoard[TOP_ROW][RIGHT_COL] == gameBoard[MIDDLE_ROW][MIDDLE_COL] &&
-		gameBoard[MIDDLE_ROW][MIDDLE_COL] == gameBoard[BOTTOM_ROW][LEFT_COL] &&
-		gameBoard[BOTTOM_ROW][LEFT_COL] != EMPTY) {
+		}else if (gameBoard[0][2] == gameBoard[1][1] &&
+		gameBoard[1][1] == gameBoard[2][0] &&
+		gameBoard[2][0] != Mark.EMPTY) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	public boolean isItATie() {
+	private boolean isItATie() {
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 3; col++) {
-				if (gameBoard[row][col] == EMPTY) {
+				if (gameBoard[row][col] == Mark.EMPTY) {
 					return false;
 				}
 			}
 		}
-		if (whoWon() == X_MARK) {
-			return false;
-		} else if (whoWon() == O_MARK) {
-			return false;
-		} else {
-			return true;
-		}
-		
+		return true;
 	}
 }

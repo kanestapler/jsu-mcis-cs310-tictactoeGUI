@@ -30,9 +30,9 @@ public class TicTacToe {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 buttonTiles[i][j] = new JButton("");
-                buttonTiles[i][j].setLabel("");
                 buttonTiles[i][j].addActionListener(new ButtonListener(i, j));
                 buttonTiles[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
+                buttonTiles[i][j].setName("Location" + i + j);
             }
         }
         
@@ -72,14 +72,38 @@ public class TicTacToe {
         setMark(row, col);
         setButtonLabel(row, col);
         if (isThereAWinner() == Mark.X_MARK) {
-            JOptionPane.showMessageDialog(null, "The winner is X");
-            resetGame();
+            int delay = 1000;
+            ActionListener taskPerformer = new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                JOptionPane.showMessageDialog(null, "The winner is X", "Game Over", JOptionPane.PLAIN_MESSAGE);
+                resetGame();
+                }
+            };
+            Timer myTimer = new Timer(delay, taskPerformer);
+            myTimer.setRepeats(false);
+            myTimer.start();
         } else if (isThereAWinner() == Mark.O_MARK) {
-            JOptionPane.showMessageDialog(null, "The winner is O");
-            resetGame();
+            int delay = 1000;
+            ActionListener taskPerformer = new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                JOptionPane.showMessageDialog(null, "The winner is O", "Game Over", JOptionPane.PLAIN_MESSAGE);
+                resetGame();
+                }
+            };
+            Timer myTimer = new Timer(delay, taskPerformer);
+            myTimer.setRepeats(false);
+            myTimer.start();
         } else if (isThereAWinner() == Mark.TIE) {
-            JOptionPane.showMessageDialog(null, "The winner is TIE");
-            resetGame();
+            int delay = 1000;
+            ActionListener taskPerformer = new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                JOptionPane.showMessageDialog(null, "The winner is TIE", "Game Over", JOptionPane.PLAIN_MESSAGE);
+                resetGame();
+                }
+            };
+            Timer myTimer = new Timer(delay, taskPerformer);
+            myTimer.setRepeats(false);
+            myTimer.start();
         } else if (isThereAWinner() == Mark.EMPTY) {
             //No winner yet
         }

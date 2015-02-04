@@ -72,7 +72,7 @@ public class TicTacToe {
         setMark(row, col);
         setButtonLabel(row, col);
         if (isThereAWinner() == Mark.X_MARK) {
-            int delay = 1000;
+            int delay = 75;
             ActionListener taskPerformer = new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                 JOptionPane.showMessageDialog(null, "The winner is X", "Game Over", JOptionPane.PLAIN_MESSAGE);
@@ -83,7 +83,7 @@ public class TicTacToe {
             myTimer.setRepeats(false);
             myTimer.start();
         } else if (isThereAWinner() == Mark.O_MARK) {
-            int delay = 1000;
+            int delay = 75;
             ActionListener taskPerformer = new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                 JOptionPane.showMessageDialog(null, "The winner is O", "Game Over", JOptionPane.PLAIN_MESSAGE);
@@ -94,7 +94,7 @@ public class TicTacToe {
             myTimer.setRepeats(false);
             myTimer.start();
         } else if (isThereAWinner() == Mark.TIE) {
-            int delay = 1000;
+            int delay = 75;
             ActionListener taskPerformer = new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                 JOptionPane.showMessageDialog(null, "The winner is TIE", "Game Over", JOptionPane.PLAIN_MESSAGE);
